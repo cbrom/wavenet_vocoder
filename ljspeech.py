@@ -16,11 +16,11 @@ def build_from_path(in_dir, out_dir, num_workers=1, tqdm=lambda x: x):
     executor = ProcessPoolExecutor(max_workers=num_workers)
     futures = []
     index = 1
-    with open(os.path.join(in_dir, 'metadata.csv'), encoding='utf-8') as f:
+    with open(os.path.join(in_dir, 'new_audio_audrey.csv'), encoding='utf-8') as f:
         for line in f:
             parts = line.strip().split('|')
             wav_path = os.path.join(in_dir, 'wavs', '%s.wav' % parts[0])
-            text = parts[2]
+            text = parts[1]
             futures.append(executor.submit(
                 partial(_process_utterance, out_dir, index, wav_path, text)))
             index += 1
@@ -61,7 +61,8 @@ def _process_utterance(out_dir, index, wav_path, text):
     mel_spectrogram = audio.melspectrogram(wav).astype(np.float32).T
     # lws pads zeros internally before performing stft
     # this is needed to adjust time resolution between audio and mel-spectrogram
-    l, r = audio.lws_pad_lr(wav, hparams.fft_size, audio.get_hop_size())
+    fft_size = hparams.fft_size if hparams.win_size is None else hparams.win_size
+    l, r = audio.lws_pad_lr(wav, fft_size, audio.get_hop_size())
 
     # zero pad for quantized signal
     out = np.pad(out, (l, r), mode="constant", constant_values=constant_values)

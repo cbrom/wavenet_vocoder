@@ -81,7 +81,7 @@ def get_hop_size():
 
 
 def _lws_processor():
-    return lws.lws(hparams.fft_size, get_hop_size(), mode="speech")
+    return lws.lws(hparams.fft_size, get_hop_size(), fftsize=hparams.win_size, mode="speech")
 
 
 def lws_num_frames(length, fsize, fshift):

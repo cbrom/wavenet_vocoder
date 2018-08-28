@@ -24,15 +24,16 @@ hparams = tf.contrib.training.HParams(
     quantize_channels=65536,  # 65536 or 256
 
     # Audio:
-    sample_rate=22050,
+    sample_rate=48000,
     # this is only valid for mulaw is True
     silence_threshold=2,
     num_mels=80,
     fmin=125,
     fmax=7600,
-    fft_size=1024,
+    fft_size=4096,
     # shift can be specified by either hop_size or frame_shift_ms
-    hop_size=256,
+    hop_size = 300, #hop_size=256,
+    win_size = 2400, #For 22050Hz, 1100 ~= 50 ms (If None, win_size = n_fft)
     frame_shift_ms=None,
     min_level_db=-100,
     ref_level_db=20,
