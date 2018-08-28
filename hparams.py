@@ -33,7 +33,7 @@ hparams = tf.contrib.training.HParams(
     fft_size=4096,
     # shift can be specified by either hop_size or frame_shift_ms
     hop_size = 256, #hop_size=256,
-    win_size = 4096, #For 22050Hz, 1100 ~= 50 ms (If None, win_size = n_fft)
+    win_size = 2400, #For 22050Hz, 1100 ~= 50 ms (If None, win_size = n_fft)
     frame_shift_ms=None,
     min_level_db=-100,
     ref_level_db=20,
