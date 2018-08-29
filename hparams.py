@@ -120,8 +120,8 @@ hparams = tf.contrib.training.HParams(
 
     # Save
     # per-step intervals
-    checkpoint_interval=10000,
-    train_eval_interval=10000,
+    checkpoint_interval=5000,
+    train_eval_interval=5000,
     # per-epoch interval
     test_eval_epoch_interval=5,
     save_optimizer_state=True,
