@@ -24,16 +24,16 @@ hparams = tf.contrib.training.HParams(
     quantize_channels=65536,  # 65536 or 256
 
     # Audio:
-    sample_rate=48000,
+    sample_rate=22050,
     # this is only valid for mulaw is True
     silence_threshold=2,
     num_mels=80,
     fmin=125,
     fmax=7600,
-    fft_size=4096,
+    fft_size=1024,
+    win_size=1024,
     # shift can be specified by either hop_size or frame_shift_ms
-    hop_size = 256, #hop_size=256,
-    win_size = 2400, #For 22050Hz, 1100 ~= 50 ms (If None, win_size = n_fft)
+    hop_size=256,
     frame_shift_ms=None,
     min_level_db=-100,
     ref_level_db=20,
@@ -120,8 +120,8 @@ hparams = tf.contrib.training.HParams(
 
     # Save
     # per-step intervals
-    checkpoint_interval=5000,
-    train_eval_interval=5000,
+    checkpoint_interval=10000,
+    train_eval_interval=10000,
     # per-epoch interval
     test_eval_epoch_interval=5,
     save_optimizer_state=True,
